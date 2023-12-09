@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png'
 
 const Navbar = () => {
@@ -51,11 +52,17 @@ const Navbar = () => {
                             <li>
                                 <a className="justify-between">
                                     Profile
-                                    <span className="badge">New</span>
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <li><NavLink
+                                to="/register"
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "active" : ""
+                                }
+                            >
+                                Login
+                            </NavLink></li>
                         </ul>
                     </div>
                 </div>
