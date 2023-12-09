@@ -1,7 +1,7 @@
 
 
 const Register = () => {
-    const handleSubmit = e => {
+    const handleRegister = e => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -15,7 +15,7 @@ const Register = () => {
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
-                <form onSubmit={handleSubmit} className="card-body bg-white rounded">
+                <form onSubmit={handleRegister} className="card-body bg-white rounded">
                     <h1 className="text-center text-2xl font-semibold">Register</h1>
                     <div className="form-control w-96">
                         <label className="label">
@@ -27,13 +27,13 @@ const Register = () => {
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input type="email" name="email" placeholder="email" className="input input-bordered focus:outline-none" required />
+                        <input type="email" name="email" placeholder="Email" className="input input-bordered focus:outline-none" required />
                     </div>
                     <div className="form-control w-96">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        <input type="password" name="password" placeholder="password" className="input input-bordered focus:outline-none" required />
+                        <input type="password" name="password" placeholder="Password" className="input input-bordered focus:outline-none" required />
                     </div>
                     <div className="form-control w-96">
                         <label className="label">
