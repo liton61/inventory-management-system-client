@@ -1,7 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png'
+import { useContext } from 'react';
+import { AuthContext } from '../authentication/Provider/AuthProvider';
 
 const Navbar = () => {
+    const { logOut, user } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(res => {
+                console.log(res.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
     return (
         <div>
             <div className="navbar bg-[#d8f3dc]">
@@ -42,19 +54,32 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    {
+                        user ?
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img alt="" src={user?.photoURL} />
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                    <li>
+                                        <a className="justify-between">
+                                            {user?.displayName}
+                                        </a>
+                                    </li>
+                                    <li><a>{user?.email}</a></li>
+                                    <li><NavLink onClick={handleLogOut}
+                                        to="/login"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "active" : ""
+                                        }
+                                    >
+                                        Sing Out
+                                    </NavLink></li>
+                                </ul>
                             </div>
-                        </div>
-                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
+                            :
                             <li><NavLink
                                 to="/login"
                                 className={({ isActive, isPending }) =>
@@ -63,8 +88,7 @@ const Navbar = () => {
                             >
                                 Login
                             </NavLink></li>
-                        </ul>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

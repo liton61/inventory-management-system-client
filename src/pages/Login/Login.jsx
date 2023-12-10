@@ -1,7 +1,25 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useContext } from 'react';
 import google from '../../assets/google.png';
+import { AuthContext } from '../../authentication/Provider/AuthProvider';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const { signIn, googleLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(res => {
+                console.log(res.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            navigate("/");
+    }
+
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
@@ -10,6 +28,24 @@ const Login = () => {
 
         const formInfo = { email, password };
         console.log(formInfo);
+
+        signIn(email, password)
+            .then(res => {
+                console.log(res.user);
+                Swal.fire({
+                    title: "Good job!",
+                    text: "You have successfully login !",
+                    icon: "success"
+                });
+                form.reset();
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
+
+        navigate("/");
     }
     return (
         <div>
@@ -32,7 +68,7 @@ const Login = () => {
                         <button className="btn btn-success text-white">Login</button>
                     </div>
                     <div className="my-3 flex justify-center items-center">
-                        <img className='w-16 h-16 rounded-full cursor-pointer' src={google} alt="" />
+                        <img onClick={handleGoogleLogin} className='w-16 h-16 rounded-full cursor-pointer' src={google} alt="" />
                     </div>
                     <p className="text-gray-600 text-sm text-center">Don't have an account? <a href="/register" className="text-success font-medium">Register</a></p>
                 </form>
