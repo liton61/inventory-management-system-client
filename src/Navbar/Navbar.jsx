@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png'
 import { useContext } from 'react';
 import { AuthContext } from '../authentication/Provider/AuthProvider';
@@ -69,25 +69,20 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                     <li><a>{user?.email}</a></li>
-                                    <li><NavLink onClick={handleLogOut}
+                                    <li className='text-red-600'><NavLink onClick={handleLogOut}
                                         to="/login"
                                         className={({ isActive, isPending }) =>
                                             isPending ? "pending" : isActive ? "active" : ""
                                         }
                                     >
-                                        Sing Out
+                                        <i className="fa-solid fa-right-from-bracket"></i> Sing Out
                                     </NavLink></li>
                                 </ul>
                             </div>
                             :
-                            <li><NavLink
-                                to="/login"
-                                className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "active" : ""
-                                }
-                            >
-                                Login
-                            </NavLink></li>
+                            <Link to="/login">
+                                <button className='btn btn-neutral'>Login</button>
+                            </Link>
                     }
                 </div>
             </div>

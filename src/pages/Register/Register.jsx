@@ -33,7 +33,7 @@ const Register = () => {
             .catch(error => {
                 console.log(error);
             })
-            navigate("/");
+        navigate("/");
     }
     return (
         <div>
@@ -62,7 +62,7 @@ const Register = () => {
                         <label className="label">
                             <span className="label-text">Photo URL</span>
                         </label>
-                        <input type="photo" name="photo" placeholder="Photo URL" className="input input-bordered focus:outline-none" required />
+                        <input type="text" name="photo" placeholder="Photo URL" className="input input-bordered focus:outline-none" required />
                     </div>
                     <div className="form-control w-96 mt-6">
                         <button className="btn btn-success text-white">Register</button>

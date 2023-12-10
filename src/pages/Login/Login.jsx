@@ -17,7 +17,7 @@ const Login = () => {
             .catch(error => {
                 console.log(error);
             })
-            navigate("/");
+        navigate("/");
     }
 
     const handleLogin = e => {
